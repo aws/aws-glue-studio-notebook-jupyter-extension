@@ -1,0 +1,48 @@
+/* Dialogues */
+
+#glue-base .jp-Dialog-content {
+  padding: 0;
+  min-width: 600px;
+  max-width: 600px;
+  box-shadow: 0 1px 1px 0 var(--color-shadow-medium, rgba(0, 28, 36, 0.3)),
+    1px 1px 1px 0 var(--color-shadow-side, rgba(0, 28, 36, 0.15)),
+    -1px 1px 1px 0 var(--color-shadow-side, rgba(0, 28, 36, 0.15));
+}
+
+#glue-base .jp-Dialog-header {
+  padding: calc(var(--space-xs, 0.8rem) + 4px) calc(var(--space-l, 2rem))
+    calc(var(--space-xs, 0.8rem) + 6px);
+  background-color: var(--color-background-container-header, #fafafa);
+  border-bottom: 1px solid var(--color-border-divider-default, #eaeded);
+  font-weight: var(--font-fontWeight-bold-2, 700);
+  line-height: var(--size-lineHeight-heading-200, 2.2rem);
+  color: var(--awsui-color-text-heading-default, #16191f);
+  font-size: 1.125rem;
+}
+
+#glue-base .jp-Dialog-body {
+  padding: var(--space-scaled-m, 1.6rem) var(--space-l, 2rem)
+    var(--space-scaled-l, 2rem);
+}
+
+#glue-base .jp-Dialog-footer {
+  padding: var(--space-s, 1.2rem) var(--space-l, 2rem);
+  border-top: 1px solid var(--color-border-divider-default, #eaeded);
+  margin-left: 0;
+  margin-right: 0;
+}
+
+#glue-base .jp-Dialog-body > label {
+  color: inherit;
+}
+
+#glue-base .jp-Dialog-body > .jp-select-wrapper {
+  margin: 0.5rem 0 1rem;
+}
+
+#glue-base .jp-Dialog-body select.jp-mod-styled {
+  border: 1px solid var(--awsui-color-border-input-default, #aab7b8);
+  background: var(--awsui-color-background-input-default, #fff);
+  color: var(--awsui-color-text-body-default, #16191f);
+  font-size: var(--jp-ui-font-size1);
+}

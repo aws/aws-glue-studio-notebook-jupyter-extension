@@ -1,0 +1,15 @@
+/* Polaris Colors */
+
+:root {
+  --aws-color-white: #fff;
+  --aws-color-black: #16191f;
+  --aws-color-grey-100: #fafafa;
+  --aws-color-grey-200: rgba(242, 243, 243, 0.9);
+  --aws-color-grey-300: #d5dbdb;
+  --aws-color-grey-400: #aab7b8;
+  --aws-color-grey-600: #545b64;
+  --aws-color-blue-600: #00a1c9;
+  --aws-color-orange-500: #ec7211;
+  --aws-color-orange-600: #d66021;
+  --aws-color-transparent: rgba(0, 0, 0, 0);
+}

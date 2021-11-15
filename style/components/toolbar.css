@@ -1,0 +1,110 @@
+/* Toolbar */
+
+#glue-base {
+  --toolbar-content-height: 50px;
+  --jp-private-toolbar-height: calc(
+    var(--toolbar-content-height) + var(--jp-border-width)
+  );
+  --toolbar-height: var(--jp-private-toolbar-height);
+  --toolbar-item-border-radius: 2px;
+  --toolbar-select-max-height: 24px;
+  --toolbar-item-size: 18px;
+}
+
+#glue-base .jp-NotebookPanel-toolbar {
+  height: var(--toolbar-height) !important;
+  padding: 0 var(--space-s);
+}
+
+#glue-base .jp-Toolbar > .jp-Toolbar-item,
+#glue-base .jp-Toolbar > .jp-Toolbar-item .jp-HTMLSelect {
+  align-items: center;
+  padding-left: 0;
+  padding-right: 0;
+  border-radius: var(--toolbar-item-border-radius);
+}
+
+#glue-base .jp-Toolbar > .jp-Toolbar-item:nth-child(2),
+#glue-base .jp-Toolbar > .jp-Toolbar-item:nth-child(5),
+#glue-base .jp-Toolbar > .jp-Toolbar-item:nth-child(9) {
+  margin-right: var(--space-l);
+}
+
+#glue-base .jp-Toolbar > .jp-Toolbar-item .jp-Button:not(.jp-Toolbar-kernelName),
+#glue-base .jp-Toolbar > .jp-Toolbar-item .jp-HTMLSelect select {
+  border: 1px solid var(--awsui-color-toolbar-item-border);
+}
+
+#glue-base .jp-Toolbar > .jp-Toolbar-item .jp-HTMLSelect select {
+  border-radius: var(--toolbar-item-border-radius);
+}
+
+#glue-base .jp-Toolbar > .jp-Toolbar-item:nth-child(1) .jp-Button,
+#glue-base .jp-Toolbar > .jp-Toolbar-item:nth-child(3) .jp-Button,
+#glue-base .jp-Toolbar > .jp-Toolbar-item:nth-child(6) .jp-Button {
+  border-radius: var(--toolbar-item-border-radius) 0 0
+    var(--toolbar-item-border-radius);
+}
+
+#glue-base .jp-Toolbar > .jp-Toolbar-item:nth-child(4) .jp-Button,
+#glue-base .jp-Toolbar > .jp-Toolbar-item:nth-child(7) .jp-Button,
+#glue-base .jp-Toolbar > .jp-Toolbar-item:nth-child(8) .jp-Button {
+  border-radius: 0;
+}
+
+#glue-base .jp-Toolbar > .jp-Toolbar-item:nth-child(2) .jp-Button,
+#glue-base .jp-Toolbar > .jp-Toolbar-item:nth-child(5) .jp-Button,
+#glue-base .jp-Toolbar > .jp-Toolbar-item:nth-child(9) .jp-Button {
+  border-radius: 0 var(--toolbar-item-border-radius)
+    var(--toolbar-item-border-radius) 0;
+}
+
+#glue-base .jp-Toolbar > .jp-Toolbar-item:nth-child(1) .jp-Button,
+#glue-base .jp-Toolbar > .jp-Toolbar-item:nth-child(3) .jp-Button,
+#glue-base .jp-Toolbar > .jp-Toolbar-item:nth-child(4) .jp-Button,
+#glue-base .jp-Toolbar > .jp-Toolbar-item:nth-child(6) .jp-Button,
+#glue-base .jp-Toolbar > .jp-Toolbar-item:nth-child(7) .jp-Button,
+#glue-base .jp-Toolbar > .jp-Toolbar-item:nth-child(8) .jp-Button {
+  border-right: 0;
+}
+
+#glue-base .jp-Toolbar > .jp-Toolbar-item:nth-child(2) .jp-Button,
+#glue-base .jp-Toolbar > .jp-Toolbar-item:nth-child(4) .jp-Button,
+#glue-base .jp-Toolbar > .jp-Toolbar-item:nth-child(5) .jp-Button,
+#glue-base .jp-Toolbar > .jp-Toolbar-item:nth-child(7) .jp-Button,
+#glue-base .jp-Toolbar > .jp-Toolbar-item:nth-child(8) .jp-Button,
+#glue-base .jp-Toolbar > .jp-Toolbar-item:nth-child(9) .jp-Button {
+  border-left: 0;
+}
+
+#glue-base .jp-Toolbar .jp-HTMLSelect {
+  box-sizing: border-box;
+  max-height: var(--toolbar-select-max-height);
+}
+
+#glue-base .jp-Toolbar > .jp-Toolbar-item svg {
+  height: var(--toolbar-item-size);
+  width: var(--toolbar-item-size);
+}
+
+#glue-base .jp-Toolbar .jp-HTMLSelect.jp-DefaultStyle.jp-Notebook-toolbarCellTypeDropdown {
+  display: flex;
+  place-items: center;
+}
+
+#glue-base .jp-Toolbar
+  .jp-HTMLSelect.jp-DefaultStyle.jp-Notebook-toolbarCellTypeDropdown
+  span {
+  height: auto;
+  display: block;
+  position: absolute;
+  right: calc(var(--space-xs) / 2);
+  display: block;
+}
+
+#glue-base .jp-Toolbar
+  .jp-HTMLSelect.jp-DefaultStyle.jp-Notebook-toolbarCellTypeDropdown
+  span
+  svg {
+  position: static !important;
+}

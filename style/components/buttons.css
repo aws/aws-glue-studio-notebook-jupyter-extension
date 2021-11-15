@@ -1,0 +1,86 @@
+/*
+   Buttons
+*/
+
+#glue-base button.glue__download-button {
+  margin-left: 5px;
+}
+
+#glue-base button.glue__download-button,
+#glue-base button.jp-mod-styled {
+  position: relative;
+  letter-spacing: 0.25px;
+}
+
+#glue-base button.glue__download-button:focus,
+#glue-base button.jp-mod-styled:focus {
+  outline: none;
+}
+
+#glue-base button.glue__download-button:focus::before,
+#glue-base button.jp-mod-styled:focus::before {
+  content: '';
+  display: block;
+  position: absolute;
+  left: -3px;
+  top: -3px;
+  width: calc(100% + 2 * 3px);
+  height: calc(100% + 2 * 3px);
+  border-radius: 2px;
+  box-shadow: 0 0 0 2px var(--awsui-color-border-item-focused);
+}
+
+#glue-base button.glue__download-button,
+#glue-base button.jp-mod-styled.jp-mod-accept,
+#glue-base button.jp-mod-styled.jp-mod-reject {
+  border-radius: 2px;
+  border: 1px solid;
+  font-weight: bold;
+}
+
+#glue-base button.glue__download-button,
+#glue-base button.jp-mod-styled.jp-mod-accept {
+  color: var(--awsui-color-text-interactive-primary);
+  background: var(--awsui-color-background-button-primary-default);
+  border-color: var(--awsui-color-border-button-primary-default);
+}
+
+#glue-base button:hover.glue__download-button,
+#glue-base button:hover.jp-mod-styled.jp-mod-accept {
+  color: var(--awsui-color-text-interactive-primary-hover);
+  background: var(--awsui-color-background-button-primary-hover);
+  border-color: var(--awsui-color-border-button-primary-hover);
+}
+
+#glue-base button.jp-mod-styled.jp-mod-reject {
+  color: var(--awsui-color-text-interactive-default);
+  background: var(--awsui-color-background-button-normal-default);
+  border-color: var(--awsui-color-border-button-normal-default);
+}
+
+#glue-base button:hover.jp-mod-styled.jp-mod-reject {
+  color: var(--awsui-color-text-interactive-hover);
+  background: var(--awsui-color-background-button-normal-hover);
+  border-color: var(--awsui-color-border-button-normal-hover);
+}
+
+/* Disabled action events; we don't want to mess with the DOM because Jupyter recalculates the layout */
+#glue-base .jp-Toolbar > .lm-Widget.p-Widget.jp-KernelName.jp-Toolbar-item,
+#glue-base .jp-Toolbar > .lm-Widget.p-Widget.jp-KernelName.jp-Toolbar-item button,
+#glue-base .lm-Widget.p-Widget.jp-Toolbar.jp-scrollbar-tiny.jp-NotebookPanel-toolbar > div.lm-Widget.p-Widget.jp-KernelName.jp-Toolbar-item > button {
+  pointer-events: none;
+}
+
+#glue-base #tab-key-5  {
+  pointer-events: none;
+  display: none;
+}
+
+/* Someone from JupyterLabs broke this, we are fixing it */
+#glue-base div.lm-Widget.p-Widget.jp-Toolbar.jp-NotebookPanel-toolbar > div[title*='Kernel'] {
+  display: flex;
+}
+
+#glue-base div.lm-Widget.p-Widget.jp-Toolbar.jp-NotebookPanel-toolbar > div[title*='Kernel'] svg {
+  align-self: center;
+}

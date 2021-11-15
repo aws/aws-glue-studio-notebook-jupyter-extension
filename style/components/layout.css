@@ -1,0 +1,49 @@
+/*
+    Layout changes; hide toolbars, buttons and general stuff we don't want to display.
+*/
+
+#glue-base #jp-left-stack {
+  border-right: 0;
+}
+
+#glue-base #jp-top-panel,
+#glue-base #jp-menu-panel,
+#glue-base #jp-MainMenu,
+#glue-base #jp-bottom-panel,
+.lm-TabBar-content li:nth-child(1),
+.lm-TabBar-content li:nth-child(2),
+.lm-TabBar-content li:nth-child(4) {
+  display: none;
+}
+
+#glue-base #jp-main-content-panel,
+#glue-base #jp-bottom-panel {
+  top: 0 !important;
+}
+
+#glue-base  #jp-main-content-panel {
+  height: 100% !important;
+}
+
+#glue-base #jp-main-vsplit-panel
+#glue-base #jp-main-content-panel,
+#glue-base #jp-main-content-panel .jp-SideBar,
+#glue-base #jp-main-split-panel,
+#glue-base #jp-left-stack,
+#glue-base #jp-main-dock-panel,
+#glue-base #jp-main-dock-panel .jp-MainAreaWidget,
+#glue-base #table-of-contents,
+#glue-base #jp-main-vsplit-panel {
+  height: 100% !important;
+}
+
+#glue-base #jp-main-dock-panel .jp-MainAreaWidget .jp-Notebook {
+  height: calc(100% - var(--toolbar-height)) !important;
+}
+
+/* DirListing */
+#glue-base .jp-SideBar.lm-TabBar.jp-mod-left
+  .lm-TabBar-tab
+  + .lm-TabBar-tab.lm-mod-current {
+  border-left: var(--jp-border-width) solid var(--jp-border-color0);
+}

@@ -1,0 +1,7 @@
+/* Fonts */
+
+:root {
+  --font-fontWeight-normal: 400;
+  --font-fontWeight-bold-2: 700;
+  --size-lineHeight-heading-200: 2.2rem;
+}
