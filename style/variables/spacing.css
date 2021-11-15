@@ -1,0 +1,9 @@
+/* Polaris Spacing */
+
+:root {
+  --space-xs: 8px;
+  --space-s: 12px;
+  --space-l: 20px;
+  --space-scaled-m: 16px;
+  --space-scaled-l: 20px;
+}

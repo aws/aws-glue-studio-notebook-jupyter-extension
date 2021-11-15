@@ -1,0 +1,37 @@
+/* Design Tokens */
+
+:root {
+  --awsui-color-text-inverted: var(--aws-color-white);
+  --awsui-color-text: var(--aws-color-black);
+  --awsui-color-text-accent: var(--aws-color-orange-500);
+  --awsui-color-background-modal-overlay: var(--aws-color-grey-200);
+  --awsui-color-border-input-default: var(--aws-color-grey-400);
+  --awsui-color-background-input-default: var(--aws-color-white);
+  --awsui-color-text-body-default: var(--aws-color-black);
+  --awsui-color-border-item-focused: var(--aws-color-blue-600);
+
+  --awsui-color-background-button-primary-default: var(
+    --awsui-color-text-accent
+  );
+  --awsui-color-text-interactive-primary: var(--awsui-color-text-inverted);
+  --awsui-color-border-button-primary-default: var(--awsui-color-text-accent);
+
+  --awsui-color-background-button-primary-hover: var(--aws-color-orange-600);
+  --awsui-color-text-interactive-primary-hover: var(
+    --awsui-color-text-inverted
+  );
+  --awsui-color-border-button-primary-hover: var(--aws-color-orange-600);
+
+  --awsui-color-background-button-normal-default: var(
+    --awsui-color-text-inverted
+  );
+  --awsui-color-text-interactive-default: var(--aws-color-grey-600);
+  --awsui-color-border-button-normal-default: var(--aws-color-transparent);
+
+  --awsui-color-background-button-normal-hover: var(--aws-color-grey-100);
+  --awsui-color-text-interactive-hover: var(--awsui-color-text);
+  --awsui-color-border-button-normal-hover: var(--aws-color-transparent);
+  --awsui-color-text-heading-default: var(--aws-color-black);
+
+  --awsui-color-toolbar-item-border: var(--aws-color-grey-400);
+}
