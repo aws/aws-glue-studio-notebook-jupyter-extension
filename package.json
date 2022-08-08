@@ -1,6 +1,6 @@
 {
   "name": "@amzn/awsgluenotebooks-extensions",
-  "version": "0.1.49",
+  "version": "0.1.55",
   "description": "A JupyterLab extension.",
   "keywords": [
     "amazon",
@@ -45,12 +45,14 @@
     "runRelease": "always"
   },
   "scripts": {
-    "build": "npm run clean && jlpm run build:lib && jlpm run build:labextension",
-    "postbuild": "mkdir -p $npm_package_vars_builddir && rsync package.json $npm_package_vars_builddir && rsync -a --exclude={‘*.spec.d.ts’,’*.spec.js’} lib $npm_package_vars_builddir && rsync -a style $npm_package_vars_builddir",
-    "build:prod": "jlpm run clean && jlpm run build:lib && jlpm run build:labextension",
+    "build": "npm run clean && npm run build:lib && npm run build:labextension",
+    "postbuild": "mkdir -p $npm_package_vars_builddir && rsync package.json $npm_package_vars_builddir && rsync -a --exclude={â€˜*.spec.d.tsâ€™,â€™*.spec.jsâ€™} lib $npm_package_vars_builddir && rsync -a style $npm_package_vars_builddir",
+    "build:prod": "npm run clean && npm run build:lib && npm run build:labextension",
     "build:labextension": "jupyter labextension build .",
     "build:labextension:dev": "jupyter labextension build --development True .",
-    "artifactory": "aws codeartifact login --tool npm --repository aws-glue --domain amazon --domain-owner 590186200215 && aws codeartifact login --tool pip --repository aws-glue --domain amazon --domain-owner 590186200215 && aws codeartifact login --tool twine --repository aws-glue --domain amazon --domain-owner 590186200215 && npm run build && npm version patch --force && npm publish",
+    "credentials": "aws codeartifact login --tool npm --repository aws-glue --domain amazon --domain-owner 590186200215 && aws codeartifact login --tool pip --repository aws-glue --domain amazon --domain-owner 590186200215 && aws codeartifact login --tool twine --repository aws-glue --domain amazon --domain-owner 590186200215",
+    "patch-and-publish": "npm run build && npm version patch --force && npm publish",
+    "artifactory": "npm run credentials && npm run patch-and-publish",
     "lint:js": "eslint --ext .ts,tsx src/ --cache --max-warnings 0",
     "lint:css": "stylelint '**/*.css'",
     "lint": "npm run lint:js && npm run lint:css",
@@ -59,28 +61,28 @@
     "test": "echo 'Tests passed'",
     "format:check": "prettier --check \"src/**/**.{ts,tsx,js,json,css,scss,md}\"",
     "format:fix": "prettier --write \"src/**/**.{ts,tsx,js,json,css,scss,md}\"",
-    "clean": "jlpm run clean:lib",
+    "clean": "npm run clean:lib",
     "clean:lib": "rimraf lib tsconfig.tsbuildinfo",
     "clean:labextension": "rimraf AWSGlueNotebookJupyterExtension/labextension",
-    "clean:all": "jlpm run clean:lib && jlpm run clean:labextension",
+    "clean:all": "npm run clean:lib && npm run clean:labextension",
     "release": "npm run eslint && npm run build:lib && npm run postbuild",
     "eslint": "eslint . --ext .ts,.tsx --fix",
     "eslint:check": "eslint . --ext .ts,.tsx",
-    "install:extension": "jlpm run build",
+    "install:extension": "npm run build",
     "watch": "run-p watch:src watch:labextension",
     "watch:src": "tsc -w",
     "watch:labextension": "jupyter labextension watch ."
   },
   "dependencies": {
     "@fortawesome/fontawesome-free": "5.15.2",
-    "@jupyterlab/application": "^3.0.0",
-    "@jupyterlab/docmanager": "^3.0.0",
-    "@jupyterlab/notebook": "^3.0.0"
+    "@jupyterlab/application": "^3.4.4",
+    "@jupyterlab/docmanager": "^3.4.4",
+    "@jupyterlab/notebook": "^3.4.4"
   },
   "devDependencies": {
     "@jupyterlab/builder": "^3.0.0",
-    "@typescript-eslint/eslint-plugin": "^4.33.0",
-    "@typescript-eslint/parser": "^4.33.0",
+    "@typescript-eslint/eslint-plugin": "^4.8.1",
+    "@typescript-eslint/parser": "^4.8.1",
     "eslint": "^7.32.0",
     "eslint-config-prettier": "^6.15.0",
     "eslint-plugin-prettier": "^3.1.4",
