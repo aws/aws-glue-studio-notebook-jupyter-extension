@@ -5,11 +5,7 @@ import {
 } from '@jupyterlab/application';
 import { ICommandPalette, IThemeManager } from '@jupyterlab/apputils';
 import { IDocumentManager } from '@jupyterlab/docmanager';
-import {
-  INotebookTracker,
-  NotebookPanel,
-  NotebookActions
-} from '@jupyterlab/notebook';
+import { INotebookTracker, NotebookPanel } from '@jupyterlab/notebook';
 import { ITranslator } from '@jupyterlab/translation';
 import {
   NotebookEventType,
@@ -18,12 +14,9 @@ import {
   onNotebookRequested,
   send
 } from './events';
+import { kernels } from './kernels';
 
-export const kernels = {
-  gluePySpark: 'glue_python_kernel',
-  glueSpark: 'glue_scala_kernel'
-};
-
+const cellNodes = new Set();
 const activate = (
   app: JupyterFrontEnd,
   labShell: ILabShell,
@@ -101,24 +94,32 @@ const activate = (
           buttonContainer.appendChild(downloadButton);
 
           /* NOTE: Try this if you need to run content programatically */
-          NotebookActions.run(
-            notebookPanel.content,
-            notebookPanel.sessionContext
-          );
-
-          /**
-           * Every time the notebook changes we send it to Glue Studio to keep track of its state.
-           * But only after the notebook has been initialized.
-           */
-          notebookTracker.activeCellChanged.connect(async (tracker, cell) => {
-            // Note: Datasets only store string values that's why we compare against a string
-            if (body.dataset.glueInitialized === 'true') {
-              onNotebookChange(tracker);
-            }
-          });
+          // NotebookActions.run(
+          //   notebookPanel.content,
+          //   notebookPanel.sessionContext
+          // );
         }
       );
     });
+
+  /**
+   * Every time the notebook changes we send it to Glue Studio to keep track of its state.
+   * But only after the notebook has been initialized.
+   */
+  notebookTracker.activeCellChanged.connect(async (tracker, cell) => {
+    const body = document.querySelector('body');
+    // Note: Datasets only store string values that's why we compare against a string
+    if (body.dataset.glueInitialized === 'true' && !cellNodes.has(cell.node)) {
+      onNotebookChange(tracker);
+
+      const cb = () => {
+        onNotebookChange(tracker);
+      };
+
+      cell.model.contentChanged.connect(cb);
+      cellNodes.add(cell.node);
+    }
+  });
 
   /**
    * This event is fired once the current notebook widget is loaded. In the container

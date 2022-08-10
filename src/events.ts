@@ -9,7 +9,8 @@ export const NotebookEventType = {
   NotebookResponse: `${PREFIX}NotebookResponse`,
   NotebookChange: `${PREFIX}NotebookChange`,
   NotebookLoadContent: `${PREFIX}NotebookLoadContent`,
-  NotebookUnmount: `${PREFIX}NotebookUnmount`
+  NotebookUnmount: `${PREFIX}NotebookUnmount`,
+  NotebookRetry: `${PREFIX}NotebookRetry`
 } as const;
 
 export type NotebookEventTypeKeys = keyof typeof NotebookEventType;
@@ -19,7 +20,7 @@ export type NotebookEventTypeValue =
 export interface NotebookCell {
   cell_type: string;
   execution_count: null;
-  metadata: { trusted: boolean; editable: boolean; deletable: boolean };
+  metadata: { trusted: boolean; editable: boolean; deletable?: boolean };
   outputs: [];
   source: string[] | string;
 }
