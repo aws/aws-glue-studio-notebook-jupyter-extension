@@ -1,6 +1,6 @@
 {
   "name": "@aws/awsgluenotebooks-extensions",
-  "version": "0.1.56",
+  "version": "0.1.57",
   "description": "A JupyterLab extension.",
   "keywords": [
     "amazon",
@@ -44,7 +44,7 @@
     "runRelease": "always"
   },
   "publishConfig": {
-    "registry":"https://npm.pkg.github.com"
+    "registry": "https://npm.pkg.github.com"
   },
   "scripts": {
     "build": "npm run clean && npm run build:lib && npm run build:labextension",
