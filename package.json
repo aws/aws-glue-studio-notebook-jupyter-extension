@@ -1,6 +1,6 @@
 {
   "name": "@aws/awsgluenotebooks-extensions",
-  "version": "0.1.57",
+  "version": "0.1.58",
   "description": "A JupyterLab extension.",
   "keywords": [
     "amazon",
@@ -53,7 +53,7 @@
     "build:labextension": "jupyter labextension build .",
     "build:labextension:dev": "jupyter labextension build --development True .",
     "credentials": "aws codeartifact login --tool npm --repository aws-glue --domain amazon --domain-owner 590186200215 && aws codeartifact login --tool pip --repository aws-glue --domain amazon --domain-owner 590186200215 && aws codeartifact login --tool twine --repository aws-glue --domain amazon --domain-owner 590186200215",
-    "patch-and-publish": "npm run build && npm version patch --force && npm publish",
+    "patch-and-publish": "npm run build && npm version patch --force && npm publish --access public",
     "artifactory": "npm run credentials && npm run patch-and-publish",
     "lint:js": "eslint --ext .ts,tsx src/ --cache --max-warnings 0",
     "lint:css": "stylelint '**/*.css'",
