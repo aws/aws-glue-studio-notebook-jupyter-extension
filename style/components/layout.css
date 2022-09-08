@@ -10,10 +10,15 @@
 #glue-base #jp-menu-panel,
 #glue-base #jp-MainMenu,
 #glue-base #jp-bottom-panel,
+#glue-base .lm-Widget.p-Widget.jp-Toolbar.jp-NotebookPanel-toolbar .jp-Toolbar-item:nth-child(1),
 .lm-TabBar-content li:nth-child(1),
 .lm-TabBar-content li:nth-child(2),
 .lm-TabBar-content li:nth-child(4) {
   display: none;
+}
+
+#glue-base .lm-Widget.p-Widget.jp-Toolbar.jp-NotebookPanel-toolbar .jp-Toolbar-item:nth-child(2) button {
+  border-left: var(--jp-border-width) solid var(--jp-border-color0);
 }
 
 #glue-base #jp-main-content-panel,
@@ -46,4 +51,11 @@
   .lm-TabBar-tab
   + .lm-TabBar-tab.lm-mod-current {
   border-left: var(--jp-border-width) solid var(--jp-border-color0);
+}
+
+
+#glue-base .jp-Notebook-ExecutionIndicator {
+  display: flex;
+  align-items: center;
+  padding: 0.5rem;
 }
