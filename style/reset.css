@@ -1,9 +1,5 @@
 /* Global Resets */
 
-* {
-  font-family: var(--jp-ui-font-family);
-}
-
 body {
   background: var(--jp-border-color0);
   font-size: var(--jp-ui-font-size1);
