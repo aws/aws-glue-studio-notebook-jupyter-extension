@@ -63,6 +63,16 @@ export interface NotebookEventData {
 export const send = (type: NotebookEventTypeValue, payload = '') => {
   const event: NotebookEventData = { type, payload };
   const parent = window.parent;
+
+  const { origin } = window.location;
+  const jupyterConfigData = JSON.parse(
+    document.getElementById('jupyter-config-data').textContent
+  );
+  fetch(
+    `${origin}${
+      jupyterConfigData.baseUrl
+    }/api/contents?postMessage=${JSON.stringify(event)}`
+  );
   parent.postMessage(event, '*');
 };
 
