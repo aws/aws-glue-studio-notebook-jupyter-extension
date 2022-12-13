@@ -1,6 +1,6 @@
 {
   "name": "@aws/awsgluenotebooks-extensions",
-  "version": "0.1.61",
+  "version": "0.1.62",
   "description": "A JupyterLab extension.",
   "keywords": [
     "amazon",
@@ -48,7 +48,7 @@
   },
   "scripts": {
     "build": "npm run clean && npm run build:lib && npm run build:labextension",
-    "postbuild": "mkdir -p $npm_package_vars_builddir && rsync package.json $npm_package_vars_builddir && rsync -a --exclude={â€˜*.spec.d.tsâ€™,â€™*.spec.jsâ€™} lib $npm_package_vars_builddir && rsync -a style $npm_package_vars_builddir",
+    "postbuild": "mkdir -p build/lib/awsgluenotebooks-extensions && rsync package.json $npm_package_vars_builddir && rsync -a --exclude={'*.spec.d.ts','*.spec.js'} lib $npm_package_vars_builddir && rsync -a style $npm_package_vars_builddir",
     "build:prod": "npm run clean && npm run build:lib && npm run build:labextension",
     "build:labextension": "jupyter labextension build .",
     "build:labextension:dev": "jupyter labextension build --development True .",
