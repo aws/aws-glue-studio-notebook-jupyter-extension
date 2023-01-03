@@ -71,7 +71,7 @@ export const send = (type: NotebookEventTypeValue, payload = '') => {
   fetch(
     `${origin}${
       jupyterConfigData.baseUrl
-    }/api/contents?postMessage=${JSON.stringify(event)}`
+    }api/contents?postMessage=${JSON.stringify(event)}`
   );
   parent.postMessage(event, '*');
 };
