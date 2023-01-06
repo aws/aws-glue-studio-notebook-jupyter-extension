@@ -63,16 +63,6 @@ export interface NotebookEventData {
 export const send = (type: NotebookEventTypeValue, payload = '') => {
   const event: NotebookEventData = { type, payload };
   const parent = window.parent;
-
-  const { origin } = window.location;
-  const jupyterConfigData = JSON.parse(
-    document.getElementById('jupyter-config-data').textContent
-  );
-  fetch(
-    `${origin}${
-      jupyterConfigData.baseUrl
-    }api/contents?postMessage=${JSON.stringify(event)}`
-  );
   parent.postMessage(event, '*');
 };
 
@@ -205,6 +195,19 @@ export const onNotebookEventReceived = (
     NotebookLoadContent,
     NotebookUnmount
   } = NotebookEventType;
+
+  const { origin } = window.location;
+  const jupyterConfigData = JSON.parse(
+    document.getElementById('jupyter-config-data').textContent
+  );
+
+  /**
+   * We call jupyter's contents API; while this call technically does nothing it will log the API call to console which will be
+   * added to Cloudwatch where we will be able to query if needed.
+   */
+  fetch(
+    `${origin}${jupyterConfigData.baseUrl}api/contents?postMessage=${type}&origin=${message.origin}`
+  );
 
   switch (type) {
     /**
