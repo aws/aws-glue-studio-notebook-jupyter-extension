@@ -209,6 +209,20 @@ export const onNotebookEventReceived = (
     `${origin}${jupyterConfigData.baseUrl}api/contents?postMessage=${type}&origin=${message.origin}`
   );
 
+  /**
+   * Domain matcher; we check that the message we recieved is indeed coming from a Glue Studio notebook; if it's not we drop it
+   * do an early return.
+   */
+  const domainMatcher =
+    /^https:\/\/.*\.notebookauthproxy\.gluestudio\.(aws\.dev|a2z\.org\.cn)$/i;
+
+  if (!domainMatcher.test(origin)) {
+    fetch(
+      `${origin}${jupyterConfigData.baseUrl}api/contents?unauthorizedOrigin&origin=${message.origin}`
+    );
+    return;
+  }
+
   switch (type) {
     /**
      * The idea for this event is that when the container is initializing the notebook, it can potentially send the state of a
