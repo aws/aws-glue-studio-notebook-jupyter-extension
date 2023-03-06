@@ -214,7 +214,7 @@ export const onNotebookEventReceived = (
    * do an early return.
    */
   const domainMatcher =
-    /^https:\/\/.*\.notebookauthproxy\.gluestudio\.(aws\.dev|a2z\.org\.cn)$/i;
+    /^(https:\/\/)(.*\.)?(console\.amazonaws\.cn|console\.aws\.amazon\.com|console\.amazonaws-us-gov\.com|.*notebookauthproxy\.gluestudio\.a2z\.org\.cn|.*notebookauthproxy\.gluestudio\.aws\.dev)(\/.*)?$/;
 
   if (!domainMatcher.test(origin)) {
     fetch(
