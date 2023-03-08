@@ -47,6 +47,13 @@ const activate = (
       // Instead we just have higher specificity and forget about the override; our theme will kick-in since it's all-in-one.
       // We can rework this later after release once we split this into multiple extensions.
       const body = document.querySelector('body');
+
+      // Ensuring extension loads in an iframe within the AWS console context; otherwise do early return
+      if (window.location === window.parent.location) {
+        body.innerHTML = '';
+        return;
+      }
+
       body?.setAttribute('id', 'glue-base');
       body?.classList.add('aws-fake-loader');
 
@@ -81,7 +88,7 @@ const activate = (
            */
           const addBtnText = 'Save the notebook contents and create checkpoint';
           const addBtnSelector = `[title="${addBtnText}"]`;
-          document.querySelector(addBtnSelector).parentElement.remove();
+          document.querySelector(addBtnSelector)?.parentElement?.remove();
 
           const buttonContainer = document.querySelector(
             '.lm-Widget.p-Widget.jp-Toolbar-spacer.jp-Toolbar-item'
