@@ -9,7 +9,7 @@
 #glue-base #jp-top-panel,
 #glue-base #jp-menu-panel,
 #glue-base #jp-MainMenu,
-#glue-base #jp-bottom-panel,
+#glue-base #jp-bottom-panel #jp-single-document-mode,
 #glue-base .lm-Widget.p-Widget.jp-Toolbar.jp-NotebookPanel-toolbar .jp-Toolbar-item:nth-child(1),
 .lm-TabBar-content li:nth-child(1),
 .lm-TabBar-content li:nth-child(2),
@@ -21,8 +21,7 @@
   border-left: var(--jp-border-width) solid var(--jp-border-color0);
 }
 
-#glue-base #jp-main-content-panel,
-#glue-base #jp-bottom-panel {
+#glue-base #jp-main-content-panel{
   top: 0 !important;
 }
 
