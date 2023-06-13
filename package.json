@@ -1,6 +1,6 @@
 {
   "name": "@aws/awsgluenotebooks-extensions",
-  "version": "0.1.67",
+  "version": "0.1.68",
   "description": "A JupyterLab extension.",
   "keywords": [
     "amazon",
