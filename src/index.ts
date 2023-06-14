@@ -56,10 +56,10 @@ const activate = (
       const body = document.querySelector('body');
 
       // Ensuring extension loads in an iframe within the AWS console context; otherwise do early return
-      // if (window.location === window.parent.location) {
-      //   body.innerHTML = '';
-      //   return;
-      // }
+      if (window.location === window.parent.location) {
+        body.innerHTML = '';
+        return;
+      }
 
       body?.setAttribute('id', 'glue-base');
       body?.classList.add('aws-fake-loader');
