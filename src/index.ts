@@ -7,6 +7,7 @@ import { ICommandPalette, IThemeManager } from '@jupyterlab/apputils';
 import { IDocumentManager } from '@jupyterlab/docmanager';
 import { INotebookTracker, NotebookPanel } from '@jupyterlab/notebook';
 import { ITranslator } from '@jupyterlab/translation';
+import { IStateDB } from '@jupyterlab/statedb';
 import {
   NotebookEventType,
   onNotebookChange,
@@ -24,10 +25,12 @@ const activate = (
   notebookTracker: INotebookTracker,
   commandPalette: ICommandPalette,
   themeManager: IThemeManager,
-  translator: ITranslator
+  translator: ITranslator,
+  state: IStateDB
 ): void => {
   const trans = translator.load('jupyterlab');
   const style = '@amzn/awsgluenotebooks-extensions/style/index.css';
+  const PLUGIN_ID = '@aws/amazon-codeguru-extension';
 
   themeManager.register({
     name: 'Glue Studio UI Light',
@@ -35,6 +38,10 @@ const activate = (
     isLight: true,
     load: () => themeManager.loadCSS(style),
     unload: () => Promise.resolve(undefined)
+  });
+
+  state.save(`${PLUGIN_ID}:plugin`, {
+    isFirstTime: false
   });
 
   // TODO: The script name should be coming from iFrame communication; so we need to populate that here.
@@ -49,10 +56,10 @@ const activate = (
       const body = document.querySelector('body');
 
       // Ensuring extension loads in an iframe within the AWS console context; otherwise do early return
-      if (window.location === window.parent.location) {
-        body.innerHTML = '';
-        return;
-      }
+      // if (window.location === window.parent.location) {
+      //   body.innerHTML = '';
+      //   return;
+      // }
 
       body?.setAttribute('id', 'glue-base');
       body?.classList.add('aws-fake-loader');
