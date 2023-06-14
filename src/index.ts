@@ -174,7 +174,8 @@ const extension: JupyterFrontEndPlugin<void> = {
     INotebookTracker,
     ICommandPalette,
     IThemeManager,
-    ITranslator
+    ITranslator,
+    IStateDB
   ],
   activate: activate
 };
