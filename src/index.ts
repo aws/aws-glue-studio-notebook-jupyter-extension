@@ -62,8 +62,6 @@ const activate = (
       }
 
       body?.setAttribute('id', 'glue-base');
-      body?.classList.add('aws-fake-loader');
-
       documentManager.createNew(temporaryScriptName, 'default', {
         name: kernels.gluePySpark
       });
@@ -79,6 +77,7 @@ const activate = (
       3. Once the modal has been clicked we remove the visibility: hidden class.
       */
       const body = document.querySelector('body');
+      body?.classList.add('aws-fake-loader');
 
       notebookTracker.widgetAdded.connect(
         async (tracker: INotebookTracker, notebookPanel: NotebookPanel) => {

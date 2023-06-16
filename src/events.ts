@@ -15,7 +15,7 @@ export const NotebookEventType = {
 
 export type NotebookEventTypeKeys = keyof typeof NotebookEventType;
 export type NotebookEventTypeValue =
-  typeof NotebookEventType[NotebookEventTypeKeys];
+  (typeof NotebookEventType)[NotebookEventTypeKeys];
 
 export interface NotebookCell {
   cell_type: string;
