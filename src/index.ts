@@ -57,8 +57,7 @@ const activate = (
 
     // Ensuring extension loads in an iframe within the AWS console context; otherwise do early return
     if (window.location === window.parent.location) {
-      // NOTE: Te be enabled
-      // body.innerHTML = '';
+      body.innerHTML = '';
       return;
     }
 
