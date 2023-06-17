@@ -213,15 +213,16 @@ export const onNotebookEventReceived = (
    * Domain matcher; we check that the message we recieved is indeed coming from a Glue Studio notebook; if it's not we drop it
    * do an early return.
    */
-  const domainMatcher =
-    /^(https:\/\/)(.*\.)?(console\.amazonaws\.cn|console\.aws\.amazon\.com|console\.amazonaws-us-gov\.com|.*notebookauthproxy\.gluestudio\.a2z\.org\.cn|.*notebookauthproxy\.gluestudio\.aws\.dev)(\/.*)?$/;
+  // NOTE: To be added back
+  // const domainMatcher =
+  //   /^(https:\/\/)(.*\.)?(console\.amazonaws\.cn|console\.aws\.amazon\.com|console\.amazonaws-us-gov\.com|.*notebookauthproxy\.gluestudio\.a2z\.org\.cn|.*notebookauthproxy\.gluestudio\.aws\.dev)(\/.*)?$/;
 
-  if (!domainMatcher.test(origin)) {
-    fetch(
-      `${origin}${jupyterConfigData.baseUrl}api/contents?unauthorizedOrigin&origin=${message.origin}`
-    );
-    return;
-  }
+  // if (!domainMatcher.test(origin)) {
+  //   fetch(
+  //     `${origin}${jupyterConfigData.baseUrl}api/contents?unauthorizedOrigin&origin=${message.origin}`
+  //   );
+  //   return;
+  // }
 
   switch (type) {
     /**

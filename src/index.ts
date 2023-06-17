@@ -48,72 +48,71 @@ const activate = (
   const temporaryScriptName = '/Untitled.ipynb';
   labShell.mode = 'single-document';
 
-  app.started
-    .then(() => {
-      // We are setting #glue-base because we don't want to create a jupyterlab override file for the theming
-      // Instead we just have higher specificity and forget about the override; our theme will kick-in since it's all-in-one.
-      // We can rework this later after release once we split this into multiple extensions.
-      const body = document.querySelector('body');
+  app.started.then(() => {
+    // We are setting #glue-base because we don't want to create a jupyterlab override file for the theming
+    // Instead we just have higher specificity and forget about the override; our theme will kick-in since it's all-in-one.
+    // We can rework this later after release once we split this into multiple extensions.
+    const body = document.querySelector('body');
+    body?.classList.add('aws-fake-loader');
 
-      // Ensuring extension loads in an iframe within the AWS console context; otherwise do early return
-      if (window.location === window.parent.location) {
-        body.innerHTML = '';
-        return;
-      }
+    // Ensuring extension loads in an iframe within the AWS console context; otherwise do early return
+    if (window.location === window.parent.location) {
+      // NOTE: Te be enabled
+      // body.innerHTML = '';
+      return;
+    }
 
-      body?.setAttribute('id', 'glue-base');
-      documentManager.createNew(temporaryScriptName, 'default', {
-        name: kernels.gluePySpark
-      });
-    })
-    .then(() => {
-      /* Beware, horrible hacky implementation
-      When launching the app from scratch the kernel will be selected when we create a new document but for some reason the kernel
-      selector will still show up.
-      
-      So this is what we do:
-      1. When the app is started we add a class with visibility: hidden to the body. This will allow jupyter to still calculate the layout while not showing anything on-screen.
-      2. Once the notebook has been attached we click on the modalOverlay programatically to dismiss it.
-      3. Once the modal has been clicked we remove the visibility: hidden class.
+    body?.setAttribute('id', 'glue-base');
+    documentManager.createNew(temporaryScriptName, 'default', {
+      name: kernels.gluePySpark
+    });
+  });
+
+  notebookTracker.widgetAdded.connect(
+    async (tracker: INotebookTracker, notebookPanel: NotebookPanel) => {
+      /*
+        Beware, horrible hacky implementation
+        When launching the app from scratch the kernel will be selected when we create a new document but for some reason the kernel
+        selector will still show up.
+        
+        So this is what we do:
+        1. When the app is started we add a class with visibility: hidden to the body. This will allow jupyter to still calculate the layout while not showing anything on-screen.
+        2. Once the notebook has been attached we click on the modalOverlay programatically to dismiss it.
+        3. Once the modal has been clicked we remove the visibility: hidden class.
       */
       const body = document.querySelector('body');
-      body?.classList.add('aws-fake-loader');
+      await notebookPanel.revealed;
+      await notebookPanel.sessionContext.ready;
+      const modalOverlay = document.querySelector(
+        '.lm-Widget.p-Widget.jp-Dialog'
+      ) as HTMLElement | undefined;
+      modalOverlay?.click();
+      body.classList.remove('aws-fake-loader');
 
-      notebookTracker.widgetAdded.connect(
-        async (tracker: INotebookTracker, notebookPanel: NotebookPanel) => {
-          await notebookPanel.revealed;
-          await notebookPanel.sessionContext.ready;
-          const modalOverlay = document.querySelector(
-            '.lm-Widget.p-Widget.jp-Dialog'
-          ) as HTMLElement | undefined;
-          modalOverlay?.click();
-          body.classList.remove('aws-fake-loader');
+      /**
+       * Remove the "Save" button. We dont want the users saving to disk.
+       */
+      const addBtnText = 'Save the notebook contents and create checkpoint';
+      const addBtnSelector = `[title="${addBtnText}"]`;
+      document.querySelector(addBtnSelector)?.parentElement?.remove();
 
-          /**
-           * Remove the "Save" button. We dont want the users saving to disk.
-           */
-          const addBtnText = 'Save the notebook contents and create checkpoint';
-          const addBtnSelector = `[title="${addBtnText}"]`;
-          document.querySelector(addBtnSelector)?.parentElement?.remove();
-
-          const buttonContainer = document.querySelector(
-            '.lm-Widget.p-Widget.jp-Toolbar-spacer.jp-Toolbar-item'
-          );
-          const downloadButton = document.createElement('button');
-          downloadButton.innerText = 'Download';
-          downloadButton.classList.add('glue__download-button');
-
-          downloadButton.onclick = () => onNotebookRequested(tracker);
-          buttonContainer.appendChild(downloadButton);
-
-          /* NOTE: Try this if you need to run content programatically */
-          // NotebookActions.run(
-          //   notebookPanel.content,
-          //   notebookPanel.sessionContext
-          // );
-        }
+      const buttonContainer = document.querySelector(
+        '.lm-Widget.p-Widget.jp-Toolbar-spacer.jp-Toolbar-item'
       );
-    });
+      const downloadButton = document.createElement('button');
+      downloadButton.innerText = 'Download';
+      downloadButton.classList.add('glue__download-button');
+
+      downloadButton.onclick = () => onNotebookRequested(tracker);
+      buttonContainer.appendChild(downloadButton);
+
+      /* NOTE: Try this if you need to run content programatically */
+      // NotebookActions.run(
+      //   notebookPanel.content,
+      //   notebookPanel.sessionContext
+      // );
+    }
+  );
 
   /**
    * Every time the notebook changes we send it to Glue Studio to keep track of its state.
