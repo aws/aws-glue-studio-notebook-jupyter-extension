@@ -12,7 +12,6 @@ import {
   NotebookEventType,
   onNotebookChange,
   onNotebookEventReceived,
-  onNotebookRequested,
   send
 } from './events';
 import { kernels } from './kernels';
@@ -94,16 +93,6 @@ const activate = (
       const addBtnText = 'Save the notebook contents and create checkpoint';
       const addBtnSelector = `[title="${addBtnText}"]`;
       document.querySelector(addBtnSelector)?.parentElement?.remove();
-
-      const buttonContainer = document.querySelector(
-        '.lm-Widget.p-Widget.jp-Toolbar-spacer.jp-Toolbar-item'
-      );
-      const downloadButton = document.createElement('button');
-      downloadButton.innerText = 'Download';
-      downloadButton.classList.add('glue__download-button');
-
-      downloadButton.onclick = () => onNotebookRequested(tracker);
-      buttonContainer.appendChild(downloadButton);
 
       /* NOTE: Try this if you need to run content programatically */
       // NotebookActions.run(
